@@ -1,0 +1,40 @@
+const MAP_POINTS={
+ hotel:{name:'国际会馆',lat:35.0629,lng:135.785},kyoto:{name:'京都站',lat:34.9858,lng:135.7588},oike:{name:'乌丸御池',lat:35.0105,lng:135.7596},keage:{name:'蹴上站',lat:35.0082,lng:135.7905},gion:{name:'祇园',lat:35.003,lng:135.778},nanzen:{name:'南禅寺',lat:35.0114,lng:135.7946},okazaki:{name:'冈崎',lat:35.012,lng:135.7842},sagajr:{name:'JR嵯峨岚山',lat:35.0188,lng:135.6812},torarashi:{name:'小火车岚山站',lat:35.0177,lng:135.6699},torkame:{name:'小火车龟冈站',lat:35.0106,lng:135.6058},umahori:{name:'JR马堀站',lat:35.0107,lng:135.6028},bridge:{name:'渡月桥',lat:35.0135,lng:135.6775},yase:{name:'八濑比叡山口站',lat:35.0657,lng:135.8082},miyake:{name:'三宅八幡站',lat:35.058,lng:135.7948},ichijoji:{name:'一乘寺站',lat:35.0431,lng:135.7872},tofust:{name:'东福寺站',lat:34.9814,lng:135.7707},inari:{name:'伏见稻荷',lat:34.9671,lng:135.7727},osaka:{name:'大阪站 / 梅田',lat:34.7025,lng:135.4959},namba:{name:'难波',lat:34.664,lng:135.501},castle:{name:'大阪城公园',lat:34.6873,lng:135.5262},doton:{name:'道顿堀',lat:34.6687,lng:135.5013},kix:{name:'关西机场',lat:34.435,lng:135.244},tennoji:{name:'天王寺',lat:34.6471,lng:135.5138}
+};
+PLACES.forEach(p=>MAP_POINTS[p.id]={...p,place:true});
+MAP_POINTS.sagano.name='小火车嵯峨站';
+const MAP_ROUTES={
+ arrive:{points:['kix','namba','tennoji','osaka'],lines:[['kix','namba'],['kix','tennoji','osaka']]},
+ osaka:{points:['castle','osaka','doton','namba'],lines:[['castle','osaka','doton','namba']]},
+ d3:{points:['shinnyodo','gion','kiyomizu'],lines:[['shinnyodo','gion','kiyomizu']]},
+ d4:{points:['sagajr','houkyoin','jojakkoji','sagano','torkame','umahori'],lines:[['sagajr','houkyoin','jojakkoji','sagano'],['sagano','torkame'],['torkame','umahori']]},
+ d5:{points:['keage','tenjuan','nanzen','eikando','okazaki'],lines:[['keage','tenjuan','nanzen','eikando','okazaki']]},
+ d6:{points:['hotel','rurikoin','rengeji','miyake','enkoji','ichijoji'],lines:[['hotel','rurikoin','rengeji','miyake','ichijoji','enkoji']]},
+ d7:{points:['kyoto','tofust','tofukuji','inari'],lines:[['kyoto','tofust','tofukuji'],['tofust','inari']]},
+ base:{points:['hotel','oike','keage','kyoto','rurikoin','enkoji','sagajr','tofukuji'],lines:[['hotel','oike','kyoto'],['oike','keage'],['kyoto','sagajr'],['kyoto','tofukuji'],['hotel','rurikoin']]},
+ return:{points:['hotel','kyoto','osaka','tennoji','kix'],lines:[['hotel','kyoto','osaka','tennoji','kix']]},
+ train:{points:['sagano','torkame','umahori','sagajr'],lines:[['sagano','torkame'],['torkame','umahori'],['umahori','sagajr']]}
+};
+const MAP_SETTINGS={tileUrl:'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png'};
+let mapSerial=0;const mapInstances=new Map();
+function mapsUrl(p){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.lat+','+p.lng)}
+function mapMarkup(key,title){return `<div class="interactive-map-shell"><div id="trip-map-${++mapSerial}" class="interactive-map" data-route="${key}" role="region" aria-label="${esc(title)}在线地图"></div><div class="map-top-tools"><button type="button" class="map-reset" data-fit-map="true">全览</button><button type="button" class="map-expand" data-map="${key}" data-title="${esc(title)}">全屏 ↗</button></div><div class="map-legend">行程连线</div><div class="map-network" hidden>地图暂未加载　<a href="${mapsUrl(MAP_POINTS[MAP_ROUTES[key].points[0]])}" target="_blank" rel="noopener noreferrer">打开导航 ↗</a></div></div>`}
+function clearInlineMaps(){for(const [el,m] of mapInstances){if(el.id!=='dialog-live-map'){m.remove();mapInstances.delete(el)}}}
+function makeMap(el,key,full=false){if(!window.L){el.textContent='地图加载失败';return}if(mapInstances.has(el))return;const config=MAP_ROUTES[key]||MAP_ROUTES.d3;
+ const m=L.map(el,{zoomControl:false,minZoom:5,maxZoom:18,scrollWheelZoom:full,dragging:true,touchZoom:true,doubleClickZoom:true,keyboard:true,zoomSnap:1}).setView([35.02,135.77],12);mapInstances.set(el,m);
+ L.control.zoom({position:'bottomright',zoomInTitle:'放大地图',zoomOutTitle:'缩小地图'}).addTo(m);
+ const layers=L.tileLayer(MAP_SETTINGS.tileUrl,{maxZoom:18,attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院</a>',updateWhenIdle:true,keepBuffer:1}).addTo(m);
+ let loaded=0,errors=0;const network=el.parentElement.querySelector('.map-network');layers.on('tileload',()=>{loaded++;if(network)network.hidden=true});layers.on('tileerror',()=>{errors++;if(!loaded&&errors>=3&&network)network.hidden=false});
+ const bounds=L.latLngBounds(config.points.map(id=>{const p=MAP_POINTS[id];return [p.lat,p.lng]}));const fit=()=>m.fitBounds(bounds,{padding:full?[48,48]:[35,38],maxZoom:full?15:14});
+ config.lines.forEach((ids,i)=>L.polyline(ids.map(id=>[MAP_POINTS[id].lat,MAP_POINTS[id].lng]),{color:i?'#2e7773':'#b74632',weight:3,opacity:.8,dashArray:'6 8',interactive:false}).addTo(m));
+ let n=0;config.points.forEach(id=>{const p=MAP_POINTS[id];const number=p.place?String(++n):'';const icon=L.divIcon({className:'trip-pin-wrapper',html:`<span class="trip-pin ${p.place?'sight-pin':'station-pin'}">${number||'●'}</span>`,iconSize:[28,28],iconAnchor:[14,14],popupAnchor:[0,-12]});
+ const marker=L.marker([p.lat,p.lng],{icon,title:p.name,alt:p.name,keyboard:true}).addTo(m);marker.bindTooltip(p.name,{direction:'top',offset:[0,-11]});
+ marker.bindPopup(`<div class="trip-popup"><h3><a href="${mapsUrl(p)}" target="_blank" rel="noopener noreferrer">${esc(p.name)} ↗</a></h3>${p.place?`<p>${esc(p.fee)}</p><p>${esc(p.hours)}</p>`:''}<div class="popup-links"><a href="${mapsUrl(p)}" target="_blank" rel="noopener noreferrer">导航 ↗</a>${p.url?`<a href="${p.url}" target="_blank" rel="noopener noreferrer">官网 ↗</a>`:''}</div></div>`,{maxWidth:255});});
+ fit();m.on('click',()=>el.focus({preventScroll:true}));const reset=el.parentElement.querySelector('[data-fit-map]');if(reset)reset.onclick=fit;requestAnimationFrame(()=>{m.invalidateSize();fit()});return m;
+}
+function mountMaps(){document.querySelectorAll('.interactive-map[data-route]').forEach(el=>makeMap(el,el.dataset.route))}
+function showInteractiveMap(key,title){const dialog=document.getElementById('map-dialog');const el=document.getElementById('dialog-live-map');if(mapInstances.has(el)){mapInstances.get(el).remove();mapInstances.delete(el)}el.replaceChildren();document.getElementById('map-title').textContent=title;dialog.showModal();makeMap(el,key,true)}
+const TEXT_LINKS={};Object.values(MAP_POINTS).forEach(p=>TEXT_LINKS[p.name]=mapsUrl(p));
+Object.assign(TEXT_LINKS,{'国际会馆站':mapsUrl(MAP_POINTS.hotel),'铁路模型馆':mapsUrl(MAP_POINTS.sagano),'JR嵯峨岚山':mapsUrl(MAP_POINTS.sagajr),'JR马堀':mapsUrl(MAP_POINTS.umahori),'小火车岚山':mapsUrl(MAP_POINTS.torarashi),'小火车龟冈':mapsUrl(MAP_POINTS.torkame),'京都站':mapsUrl(MAP_POINTS.kyoto),'梅田':mapsUrl(MAP_POINTS.osaka),'蹴上':mapsUrl(MAP_POINTS.keage),'八濑駅前':mapsUrl(MAP_POINTS.yase),'一乘寺':mapsUrl(MAP_POINTS.ichijoji),'三宅八幡':mapsUrl(MAP_POINTS.miyake),'京都巴士':'https://www.kyotobus.jp/','HARUKA':'https://www.westjr.co.jp/travel-information/en/tickets-passes/oneway/haruka/','南海':'https://www.nankai.co.jp/tc_railway/access-timetable'});
+function linkifyTravelText(){const names=Object.keys(TEXT_LINKS).sort((a,b)=>b.length-a.length);const pattern=new RegExp(names.map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
+ document.querySelectorAll('.event-detail,.detail-section p,.access p,.travel-row .rail,.travel-row p,.airport-time span:last-child,.airport-rail b,.route-chips b,.day-head p:not(.kicker),.utility p').forEach(el=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())if(!walker.currentNode.parentElement.closest('a,button'))nodes.push(walker.currentNode);nodes.forEach(node=>{const text=node.textContent;pattern.lastIndex=0;const matches=[...text.matchAll(pattern)];if(!matches.length)return;const f=document.createDocumentFragment();let last=0;matches.forEach(match=>{f.append(document.createTextNode(text.slice(last,match.index)));const a=document.createElement('a');a.href=TEXT_LINKS[match[0]];a.textContent=match[0];a.target='_blank';a.rel='noopener noreferrer';a.className='inline-travel-link';f.append(a);last=match.index+match[0].length});f.append(document.createTextNode(text.slice(last)));node.replaceWith(f)})});}

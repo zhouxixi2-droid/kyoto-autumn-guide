@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#183e33"><title>京都红叶旅行 · 2026</title><meta name="description" content="京都大阪红叶旅行，11月28日—12月5日。每日路线、景点、预约与交通。"><link rel="stylesheet" href="vendor/leaflet.css"><link rel="stylesheet" href="style.css"></head>
+<body><header class="bar"><a class="brand" href="#itinerary"><span class="leaf">✳</span> 京都の秋 <small>2026</small></a><nav class="mainnav" aria-label="主导航"><button data-view="itinerary" class="active">行程</button><button data-view="places">景点</button><button data-view="bookings">预约</button><button data-view="transport">交通</button></nav><span class="party">2 位成人</span></header>
+<main id="app"><section class="hero"><img src="assets/rurikoin.webp" alt="瑠璃光院庭园倒影"><div class="shade"></div><div class="hero-copy"><span class="eyebrow">KYOTO / OSAKA</span><h1>京都红叶旅行</h1><p>11.28 — 12.05 <span>8 天 · 7 晚</span></p></div><div class="hero-bookings"><span class="status-dot"></span> 红叶名所 · 每日路线 · 预约指南</div></section>
+<section id="content" aria-live="polite"></section></main>
+<footer><span>京都 · 大阪　2026</span><button id="credits-btn">图片来源</button><span><a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">地图：国土地理院 ↗</a></span></footer>
+<dialog id="place-dialog"><button class="close" aria-label="关闭景点详情">×</button><div id="place-detail"></div></dialog>
+<dialog id="map-dialog"><button class="close" aria-label="关闭地图">×</button><h2 id="map-title">路线地图</h2><div id="dialog-live-map" class="dialog-live-map" role="region" aria-label="全屏在线地图"></div></dialog>
+<dialog id="credits-dialog"><button class="close" aria-label="关闭图片来源">×</button><h2>图片来源</h2><p class="muted">往年实拍</p><div id="credits-list"></div></dialog>
+<div id="toast" role="status"></div>
+<script src="data.js"></script><script src="vendor/leaflet.js"></script><script src="maps.js"></script><script src="app.js"></script></body></html>
