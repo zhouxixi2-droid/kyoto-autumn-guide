@@ -7,9 +7,9 @@ MAP_POINTS.torsaga={name:'小火车嵯峨站',lat:35.0186,lng:135.6813};
 const MAP_ROUTES={
  arrive:{points:['kix','namba','tennoji','osaka'],lines:[['kix','namba'],['kix','tennoji','osaka']]},
  osaka:{points:['castle','osaka','doton','namba'],lines:[['castle','osaka','doton','namba']]},
- d3:{points:['shinnyodo','gion','kiyomizu'],lines:[['shinnyodo','gion','kiyomizu']]},
- d4:{points:['sagajr','houkyoin','jojakkoji','umahori','sagano','torsaga'],lines:[['sagajr','houkyoin','jojakkoji','sagajr'],['sagajr','umahori'],['umahori','sagano'],['sagano','torsaga']]},
- d5:{points:['keage','tenjuan','nanzen','eikando','okazaki'],lines:[['keage','tenjuan','nanzen','eikando','okazaki']]},
+ d3:{points:['shinnyodo','tenjuan','kiyomizu'],lines:[['shinnyodo','tenjuan','kiyomizu']]},
+ d4:{points:['sagajr','jojakkoji','houkyoin','umahori','sagano','torsaga'],lines:[['sagajr','jojakkoji','houkyoin','sagajr'],['sagajr','umahori'],['umahori','sagano'],['sagano','torsaga']]},
+ d5:{points:['keage','eikando','nanzen','okazaki'],lines:[['keage','eikando','nanzen','okazaki']]},
  d6:{points:['hotel','rurikoin','rengeji','miyake','enkoji','ichijoji'],lines:[['hotel','rurikoin','rengeji','miyake','ichijoji','enkoji']]},
  d7:{points:['kyoto','tofust','tofukuji','inari'],lines:[['kyoto','tofust','tofukuji'],['tofust','inari']]},
  base:{points:['hotel','oike','keage','kyoto','rurikoin','enkoji','sagajr','tofukuji'],lines:[['hotel','oike','kyoto'],['oike','keage'],['kyoto','sagajr'],['kyoto','tofukuji'],['hotel','rurikoin']]},
@@ -39,4 +39,5 @@ const TEXT_LINKS={};Object.values(MAP_POINTS).forEach(p=>TEXT_LINKS[p.name]=maps
 Object.assign(TEXT_LINKS,{'国际会馆站':mapsUrl(MAP_POINTS.hotel),'铁路模型馆':mapsUrl(MAP_POINTS.torsaga),'小火车嵯峨站':mapsUrl(MAP_POINTS.torsaga),'小火车龟冈站':mapsUrl(MAP_POINTS.torkame),'JR嵯峨岚山':mapsUrl(MAP_POINTS.sagajr),'JR马堀':mapsUrl(MAP_POINTS.umahori),'小火车岚山':mapsUrl(MAP_POINTS.torarashi),'小火车龟冈':mapsUrl(MAP_POINTS.torkame),'京都站':mapsUrl(MAP_POINTS.kyoto),'梅田':mapsUrl(MAP_POINTS.osaka),'蹴上':mapsUrl(MAP_POINTS.keage),'八濑駅前':mapsUrl(MAP_POINTS.yase),'一乘寺':mapsUrl(MAP_POINTS.ichijoji),'三宅八幡':mapsUrl(MAP_POINTS.miyake),'京都巴士':'https://www.kyotobus.jp/','HARUKA':'https://www.westjr.co.jp/travel-information/en/tickets-passes/oneway/haruka/','南海':'https://www.nankai.co.jp/tc_railway/access-timetable'});
 function linkifyTravelText(){const names=Object.keys(TEXT_LINKS).sort((a,b)=>b.length-a.length);const pattern=new RegExp(names.map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
  document.querySelectorAll('.event-detail,.detail-section p,.access p,.travel-row .rail,.travel-row p,.airport-time span:last-child,.airport-rail b,.route-chips b,.day-head p:not(.kicker),.utility p').forEach(el=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())if(!walker.currentNode.parentElement.closest('a,button'))nodes.push(walker.currentNode);nodes.forEach(node=>{const text=node.textContent;pattern.lastIndex=0;const matches=[...text.matchAll(pattern)];if(!matches.length)return;const f=document.createDocumentFragment();let last=0;matches.forEach(match=>{f.append(document.createTextNode(text.slice(last,match.index)));const a=document.createElement('a');a.href=TEXT_LINKS[match[0]];a.textContent=match[0];a.target='_blank';a.rel='noopener noreferrer';a.className='inline-travel-link';f.append(a);last=match.index+match[0].length});f.append(document.createTextNode(text.slice(last)));node.replaceWith(f)})});}
+
 
