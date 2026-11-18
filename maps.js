@@ -2,18 +2,19 @@ const MAP_POINTS={
  hotel:{name:'国际会馆',lat:35.0629,lng:135.785},kyoto:{name:'京都站',lat:34.9858,lng:135.7588},oike:{name:'乌丸御池',lat:35.0105,lng:135.7596},keage:{name:'蹴上站',lat:35.0082,lng:135.7905},gion:{name:'祇园',lat:35.003,lng:135.778},nanzen:{name:'南禅寺',lat:35.0114,lng:135.7946},okazaki:{name:'冈崎',lat:35.012,lng:135.7842},sagajr:{name:'JR嵯峨岚山',lat:35.0188,lng:135.6812},torarashi:{name:'小火车岚山站',lat:35.0177,lng:135.6699},torkame:{name:'小火车龟冈站',lat:35.0106,lng:135.6058},umahori:{name:'JR马堀站',lat:35.0107,lng:135.6028},bridge:{name:'渡月桥',lat:35.0135,lng:135.6775},yase:{name:'八濑比叡山口站',lat:35.0657,lng:135.8082},miyake:{name:'三宅八幡站',lat:35.058,lng:135.7948},ichijoji:{name:'一乘寺站',lat:35.0431,lng:135.7872},tofust:{name:'东福寺站',lat:34.9814,lng:135.7707},inari:{name:'伏见稻荷',lat:34.9671,lng:135.7727},osaka:{name:'大阪站 / 梅田',lat:34.7025,lng:135.4959},namba:{name:'难波',lat:34.664,lng:135.501},castle:{name:'大阪城公园',lat:34.6873,lng:135.5262},doton:{name:'道顿堀',lat:34.6687,lng:135.5013},kix:{name:'关西机场',lat:34.435,lng:135.244},tennoji:{name:'天王寺',lat:34.6471,lng:135.5138}
 };
 PLACES.forEach(p=>MAP_POINTS[p.id]={...p,place:true});
-MAP_POINTS.sagano.name='小火车嵯峨站';
+MAP_POINTS.sagano.name='小火车龟冈站（上车）';
+MAP_POINTS.torsaga={name:'小火车嵯峨站',lat:35.0186,lng:135.6813};
 const MAP_ROUTES={
  arrive:{points:['kix','namba','tennoji','osaka'],lines:[['kix','namba'],['kix','tennoji','osaka']]},
  osaka:{points:['castle','osaka','doton','namba'],lines:[['castle','osaka','doton','namba']]},
  d3:{points:['shinnyodo','gion','kiyomizu'],lines:[['shinnyodo','gion','kiyomizu']]},
- d4:{points:['sagajr','houkyoin','jojakkoji','sagano','torkame','umahori'],lines:[['sagajr','houkyoin','jojakkoji','sagano'],['sagano','torkame'],['torkame','umahori']]},
+ d4:{points:['sagajr','houkyoin','jojakkoji','umahori','sagano','torsaga'],lines:[['sagajr','houkyoin','jojakkoji','sagajr'],['sagajr','umahori'],['umahori','sagano'],['sagano','torsaga']]},
  d5:{points:['keage','tenjuan','nanzen','eikando','okazaki'],lines:[['keage','tenjuan','nanzen','eikando','okazaki']]},
  d6:{points:['hotel','rurikoin','rengeji','miyake','enkoji','ichijoji'],lines:[['hotel','rurikoin','rengeji','miyake','ichijoji','enkoji']]},
  d7:{points:['kyoto','tofust','tofukuji','inari'],lines:[['kyoto','tofust','tofukuji'],['tofust','inari']]},
  base:{points:['hotel','oike','keage','kyoto','rurikoin','enkoji','sagajr','tofukuji'],lines:[['hotel','oike','kyoto'],['oike','keage'],['kyoto','sagajr'],['kyoto','tofukuji'],['hotel','rurikoin']]},
  return:{points:['hotel','kyoto','osaka','tennoji','kix'],lines:[['hotel','kyoto','osaka','tennoji','kix']]},
- train:{points:['sagano','torkame','umahori','sagajr'],lines:[['sagano','torkame'],['torkame','umahori'],['umahori','sagajr']]}
+ train:{points:['umahori','sagano','torsaga','sagajr'],lines:[['umahori','sagano'],['sagano','torsaga'],['torsaga','sagajr']]}
 };
 const MAP_SETTINGS={tileUrl:'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png'};
 let mapSerial=0;const mapInstances=new Map();
@@ -35,6 +36,7 @@ function makeMap(el,key,full=false){if(!window.L){el.textContent='地图加载�
 function mountMaps(){document.querySelectorAll('.interactive-map[data-route]').forEach(el=>makeMap(el,el.dataset.route))}
 function showInteractiveMap(key,title){const dialog=document.getElementById('map-dialog');const el=document.getElementById('dialog-live-map');if(mapInstances.has(el)){mapInstances.get(el).remove();mapInstances.delete(el)}el.replaceChildren();document.getElementById('map-title').textContent=title;dialog.showModal();makeMap(el,key,true)}
 const TEXT_LINKS={};Object.values(MAP_POINTS).forEach(p=>TEXT_LINKS[p.name]=mapsUrl(p));
-Object.assign(TEXT_LINKS,{'国际会馆站':mapsUrl(MAP_POINTS.hotel),'铁路模型馆':mapsUrl(MAP_POINTS.sagano),'JR嵯峨岚山':mapsUrl(MAP_POINTS.sagajr),'JR马堀':mapsUrl(MAP_POINTS.umahori),'小火车岚山':mapsUrl(MAP_POINTS.torarashi),'小火车龟冈':mapsUrl(MAP_POINTS.torkame),'京都站':mapsUrl(MAP_POINTS.kyoto),'梅田':mapsUrl(MAP_POINTS.osaka),'蹴上':mapsUrl(MAP_POINTS.keage),'八濑駅前':mapsUrl(MAP_POINTS.yase),'一乘寺':mapsUrl(MAP_POINTS.ichijoji),'三宅八幡':mapsUrl(MAP_POINTS.miyake),'京都巴士':'https://www.kyotobus.jp/','HARUKA':'https://www.westjr.co.jp/travel-information/en/tickets-passes/oneway/haruka/','南海':'https://www.nankai.co.jp/tc_railway/access-timetable'});
+Object.assign(TEXT_LINKS,{'国际会馆站':mapsUrl(MAP_POINTS.hotel),'铁路模型馆':mapsUrl(MAP_POINTS.torsaga),'小火车嵯峨站':mapsUrl(MAP_POINTS.torsaga),'小火车龟冈站':mapsUrl(MAP_POINTS.torkame),'JR嵯峨岚山':mapsUrl(MAP_POINTS.sagajr),'JR马堀':mapsUrl(MAP_POINTS.umahori),'小火车岚山':mapsUrl(MAP_POINTS.torarashi),'小火车龟冈':mapsUrl(MAP_POINTS.torkame),'京都站':mapsUrl(MAP_POINTS.kyoto),'梅田':mapsUrl(MAP_POINTS.osaka),'蹴上':mapsUrl(MAP_POINTS.keage),'八濑駅前':mapsUrl(MAP_POINTS.yase),'一乘寺':mapsUrl(MAP_POINTS.ichijoji),'三宅八幡':mapsUrl(MAP_POINTS.miyake),'京都巴士':'https://www.kyotobus.jp/','HARUKA':'https://www.westjr.co.jp/travel-information/en/tickets-passes/oneway/haruka/','南海':'https://www.nankai.co.jp/tc_railway/access-timetable'});
 function linkifyTravelText(){const names=Object.keys(TEXT_LINKS).sort((a,b)=>b.length-a.length);const pattern=new RegExp(names.map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
  document.querySelectorAll('.event-detail,.detail-section p,.access p,.travel-row .rail,.travel-row p,.airport-time span:last-child,.airport-rail b,.route-chips b,.day-head p:not(.kicker),.utility p').forEach(el=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())if(!walker.currentNode.parentElement.closest('a,button'))nodes.push(walker.currentNode);nodes.forEach(node=>{const text=node.textContent;pattern.lastIndex=0;const matches=[...text.matchAll(pattern)];if(!matches.length)return;const f=document.createDocumentFragment();let last=0;matches.forEach(match=>{f.append(document.createTextNode(text.slice(last,match.index)));const a=document.createElement('a');a.href=TEXT_LINKS[match[0]];a.textContent=match[0];a.target='_blank';a.rel='noopener noreferrer';a.className='inline-travel-link';f.append(a);last=match.index+match[0].length});f.append(document.createTextNode(text.slice(last)));node.replaceWith(f)})});}
+

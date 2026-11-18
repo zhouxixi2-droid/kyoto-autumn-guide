@@ -1,5 +1,6 @@
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let view='itinerary',dayIndex=2,area='全部',transport='base',zoom=1;let checked={};try{checked=JSON.parse(localStorage.getItem('kyoto-trip-checks')||'{}')}catch{}
+try{if(localStorage.getItem('kyoto-route-revision')!=='20261118'){const moved={};Object.entries(checked).forEach(([k,v])=>{const m=k.match(/^(3|6)-(.*)$/);if(!m||m[1]==='3')moved[m?'6-'+m[2]:k]=v});checked=moved;localStorage.setItem('kyoto-trip-checks',JSON.stringify(checked));localStorage.setItem('kyoto-route-revision','20261118')}}catch{}
 const areas=['全部','洛东','东山','岚山','洛北','京都南部'];const site=id=>PLACES.find(p=>p.id===id);const sourceLink=(p,label='官网')=>`<a class="btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`;
 const mapButton=(key,title)=>mapMarkup(key,title);
 const pill=(text)=>`<span class="pill ${text.includes('已预约')?'booked':text.includes('待出票')?'pending':''}">${esc(text)}</span>`;
@@ -18,4 +19,5 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,a');if(!t
 document.addEventListener('change',e=>{if(e.target.matches('[data-event]')){const idx=Number(e.target.dataset.event);checked[`${dayIndex}-${idx}`]=e.target.checked;try{localStorage.setItem('kyoto-trip-checks',JSON.stringify(checked))}catch{}e.target.closest('.timeline-row').classList.toggle('done',e.target.checked);const d=DAYS[dayIndex];$('.progress-text').textContent=`${d.events.filter((_,i)=>checked[`${dayIndex}-${i}`]).length} / ${d.events.length} 已完成`;}});
 document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}}));
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['itinerary','places','bookings','transport','conditions'].includes(h)){view=h;render()}});if(['itinerary','places','bookings','transport','conditions'].includes(location.hash.slice(1)))view=location.hash.slice(1);render();
+
 
