@@ -1,11 +1,9 @@
-// Manual snapshot: 2026-11-18, Asia/Shanghai. Source observation dates are kept separately.
-const CONDITIONS_UPDATED = '2026-11-18';
+// Manual snapshot: 2026-11-23, Asia/Shanghai. Source observation dates are kept separately.
+const CONDITIONS_UPDATED = '2026-11-23';
 const FOLIAGE_SOURCES = {
   jr: 'https://souda-kyoto.jp/guide/season/koyo/',
   west: 'https://kisetsu.jr-odekake.net/result/MMJ/A1005?lang=ja',
   jma: 'https://www.data.jma.go.jp/yoho/data/jishin/met/kishoushien_Kyoto_Kyoto-shi.html',
-  outlook: 'https://www.jma.go.jp/bosai/season/',
-  bulletin: 'https://weather.basekernel.co.jp/sp/disaster/010600/month1.html',
   kyoto: 'https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_10d.php?block_no=47759&prec_no=61',
   osaka: 'https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_10d.php?block_no=47772&prec_no=62'
 };
@@ -14,59 +12,59 @@ const FOLIAGE = [
     "id": "shinnyodo",
     "name": "真如堂",
     "visit": "11/30",
-    "observed": "11/18",
-    "status": "部分见頃",
+    "observed": "11/23",
+    "status": "已见頃",
     "start": null,
     "fall": null,
     "tone": "steady",
     "tag": "保留原日",
-    "advice": "保留11/30上午；与已较早见頃的天授庵同日串联，三重塔和本堂后侧叶量到访前再复核。",
-    "url": "https://souda-kyoto.jp/guide/season/koyo/",
-    "provider": "JR 东海·现场照片"
+    "advice": "保留11/30上午。看三重塔、参道与本堂后侧，雨后可看散落在苔地与石阶的枫叶。",
+    "url": "https://shin-nyo-do.jp/",
+    "provider": "真如堂官网"
   },
   {
     "id": "kiyomizu",
     "name": "清水寺",
     "visit": "11/30",
-    "observed": "11/17",
-    "status": "部分见頃",
-    "start": "11/23",
-    "fall": "12/08",
+    "observed": "11/20",
+    "status": "已见頃 · 约七至八成",
+    "start": null,
+    "fall": "12/05",
     "tone": "steady",
     "tag": "窗口较合适",
-    "advice": "11/30保留夜间末场；Weathernews现预计11/23起见頃、12/8起落叶，仍属预测窗口。",
-    "url": "https://souda-kyoto.jp/guide/season/koyo/",
-    "provider": "JR东海实拍；预测见右列",
+    "advice": "落叶预计起点由12/8提前到12/5。11/30仍优先保留秋季夜间参拜最后一晚。",
+    "url": "https://weathernews.jp/koyo/spot/26112/",
+    "provider": "Weathernews",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26112/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   },
   {
     "id": "tofukuji",
     "name": "东福寺",
     "visit": "12/04",
-    "observed": "11/18",
-    "status": "部分见頃",
-    "start": "11/26",
-    "fall": "12/13",
-    "tone": "steady",
-    "tag": "窗口较合适",
-    "advice": "12/4仍在Weathernews当前预测窗口内，保持08:30普通日间参拜；早朝没有新增预订。",
-    "url": "https://souda-kyoto.jp/guide/season/koyo/",
-    "provider": "JR东海实拍；预测见右列",
+    "observed": "11/19",
+    "status": "已见頃 · 约七至八成",
+    "start": null,
+    "fall": "12/06",
+    "tone": "watch",
+    "tag": "偏晚风险提高",
+    "advice": "落叶预计起点由12/13提前到12/6。保留12/4 08:30通天桥，11月底复核红叶谷照片。",
+    "url": "https://weathernews.jp/koyo/spot/26111/",
+    "provider": "Weathernews",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26111/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   },
   {
     "id": "tenjuan",
     "name": "天授庵",
     "visit": "11/30",
-    "observed": "11/16",
+    "observed": "11/20",
     "status": "已见頃",
     "start": null,
     "fall": null,
     "tone": "watch",
     "tag": "提前两天",
-    "advice": "11/16已见頃，提前至11/30下午，减少逛街时间。若寄存或交通延误，再用12/2下午补位；提前是风险取舍，仍需看月底新照。",
+    "advice": "JR东海11/20实拍仍在见頃，保留11/30 13:30。若寄存或交通延误，用12/2下午补位。",
     "url": "https://souda-kyoto.jp/guide/season/koyo/",
     "provider": "JR 东海·现场照片"
   },
@@ -74,29 +72,29 @@ const FOLIAGE = [
     "id": "eikando",
     "name": "永观堂",
     "visit": "12/02",
-    "observed": "11/16",
-    "status": "约三成变色",
+    "observed": "11/20",
+    "status": "约五成变色",
     "start": "11/24",
     "fall": "12/06",
     "tone": "steady",
     "tag": "保留原日",
-    "advice": "保留12/2，提前到09:00普通场；放生池与开放诸堂为主，卧龙廊、千佛堂关闭。",
+    "advice": "预估11/24见頃、12/6起落叶。保留12/2 09:00普通场，优先放生池与开放诸堂。",
     "url": "https://weathernews.jp/koyo/spot/26120/",
     "provider": "Weathernews",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26120/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   },
   {
     "id": "rurikoin",
     "name": "瑠璃光院",
     "visit": "12/03",
-    "observed": "11/16",
-    "status": "开始变色",
+    "observed": "11/19",
+    "status": "部分见頃",
     "start": null,
     "fall": null,
     "tone": "review",
     "tag": "月底复核",
-    "advice": "保留12/3已约时段；此次未核实到比11/16更新的同源实拍，不把旧照片改标成11/18。月底看书院庭园叶量。",
+    "advice": "较11/16开始变色有所推进。保留12/3上午的预约时段，月底关注书院当期照片。",
     "url": "https://souda-kyoto.jp/guide/season/koyo/",
     "provider": "JR 东海·现场照片"
   },
@@ -104,13 +102,13 @@ const FOLIAGE = [
     "id": "rengeji",
     "name": "莲华寺",
     "visit": "12/03",
-    "observed": "11/16",
-    "status": "部分见頃",
+    "observed": "11/19",
+    "status": "已见頃",
     "start": null,
     "fall": null,
     "tone": "review",
     "tag": "月底复核",
-    "advice": "保留12/3瑠璃光院之后的顺路参拜；最新核实实拍仍为11/16，月底再看池庭叶量。",
+    "advice": "保留瑠璃光院之后的顺路参拜，按池庭叶量和停留时间灵活安排。",
     "url": "https://souda-kyoto.jp/guide/season/koyo/",
     "provider": "JR 东海·现场照片"
   },
@@ -118,45 +116,45 @@ const FOLIAGE = [
     "id": "enkoji",
     "name": "圆光寺",
     "visit": "12/03",
-    "observed": "11/17",
-    "status": "约六成变色",
-    "start": "11/20",
+    "observed": "11/20",
+    "status": "已见頃 · 约七至八成",
+    "start": null,
     "fall": "12/05",
     "tone": "watch",
     "tag": "偏晚风险",
-    "advice": "预测窗口较旧版提前1天，12/3靠近落叶起点；保留15:00预约，重点复核十牛之庭叶量，预计停留约1小时。",
+    "advice": "保留12/3 15:00。预计12/5起落叶，届时优先看十牛之庭的树冠与地面落叶。",
     "url": "https://weathernews.jp/koyo/spot/26114/",
     "provider": "Weathernews",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26114/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   },
   {
     "id": "houkyoin",
     "name": "宝筐院",
     "visit": "12/01",
-    "observed": "11/18",
-    "status": "约四成变色",
-    "start": "11/23",
-    "fall": "12/06",
+    "observed": "11/22",
+    "status": "已见頃 · 约七至八成",
+    "start": null,
+    "fall": "12/05",
     "tone": "steady",
     "tag": "保留12/1",
-    "advice": "11/18约四成变色，12/1仍在当前预测窗口内；安排在常寂光寺之后，10:40前后入寺。",
-    "url": "https://weathernews.jp/koyo/spot/26102/",
-    "provider": "Weathernews",
+    "advice": "寺院11/22报告境内深处已进入见頃。保留12/1约10:40，优先看庭园深处和苔地。",
+    "url": "https://www.weathernews.jp/koyo/spot/26102/?fm=pref",
+    "provider": "宝筐院供稿 · Weathernews",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26102/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   },
   {
     "id": "jojakkoji",
     "name": "常寂光寺",
     "visit": "12/01",
-    "observed": "11/18（官网标题）",
-    "status": "已见頃；预计本周末盛期",
+    "observed": "11/22（官网标题）",
+    "status": "已见頃 · 多宝塔周边颜色好",
     "start": null,
     "fall": null,
     "tone": "watch",
     "tag": "偏晚风险",
-    "advice": "官网标题11/18更新，预计11/21–22周末盛期；12/1可能偏后，改为09:00当天首站。官网新进展优先于11/14旧实况；本堂书院特开11/30结束。",
+    "advice": "寺方11/22更新说多宝塔周边好，预计下个周末趋于盛期。12/1仍排09:00首站。本堂、书院特开11/30结束。",
     "url": "https://jojakko-ji.or.jp/news/令和8年の紅葉予報（11-10）/",
     "provider": "常寂光寺官网"
   },
@@ -164,29 +162,29 @@ const FOLIAGE = [
     "id": "arashiyama",
     "name": "岚山整体",
     "visit": "12/01",
-    "observed": "11/17",
-    "status": "见頃·约七至八成",
+    "observed": "11/20",
+    "status": "渡月桥一带已见頃",
     "start": null,
     "fall": "11/30",
     "tone": "watch",
     "tag": "较早落叶风险",
-    "advice": "区域预计11/30起落叶，12/1仍可能偏后；保留整天提前的安排，常寂光寺先看，庭园与峡谷分开判断。",
-    "url": "https://weathernews.jp/koyo/spot/26101/",
-    "provider": "Weathernews",
+    "advice": "Weathernews的区域落叶预测仍为11/30左右。各庭园、渡月桥和保津峡进度不同，维持12/1分区赏枫。",
+    "url": "https://souda-kyoto.jp/guide/season/koyo/",
+    "provider": "JR 东海·现场照片",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26101/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   },
   {
     "id": "hozukyo",
     "name": "保津峡·小火车沿线",
     "visit": "12/01",
-    "observed": "11/18",
-    "status": "开始变色",
+    "observed": "11/23",
+    "status": "开始变色 · 接近见頃",
     "start": null,
     "fall": null,
     "tone": "review",
     "tag": "沿线单独复核",
-    "advice": "JR西日本11/18仍报开始变色；保留12/1已确认的14:30列车，不能用岚山区域进度代表整条峡谷。",
+    "advice": "JR西日本11/23称峡谷逐渐接近见頃。12/1 14:30光线比12/2 16:30更适合看车窗红叶。",
     "url": "https://kisetsu.jr-odekake.net/result/MMJ/A1005?lang=ja",
     "provider": "JR 西日本"
   },
@@ -194,52 +192,118 @@ const FOLIAGE = [
     "id": "osakacastle",
     "name": "大阪城公园",
     "visit": "11/29",
-    "observed": "11/16",
-    "status": "见頃·约七至八成",
+    "observed": "11/20",
+    "status": "已见頃 · 约七至八成",
     "start": null,
     "fall": "12/02",
     "tone": "steady",
     "tag": "保留原日",
-    "advice": "11/29保留上午公园；当前预计12/2起落叶，不同树种进度分别看。",
+    "advice": "落叶预计12/2开始，11/29保留上午看银杏与公园。",
     "url": "https://weathernews.jp/koyo/spot/26207/",
     "provider": "Weathernews",
     "forecastUrl": "https://weathernews.jp/koyo/spot/26207/",
-    "forecastChecked": "11/18"
+    "forecastChecked": "11/23"
   }
 ];
 const DAY_CONDITIONS = {
   "11.28": {
-    "leaf": "晚间抵达大阪，以入住、休息为主。",
-    "weather": "旅行期逐日预报待发布；夜间随身带保暖外套。"
+    "leaf": "抵达大阪后入住休息。",
+    "weather": "关西机场19/13°C，降雨30%。20:55抵达。下机防风，机场数值为日最高／最低。"
   },
   "11.29": {
-    "leaf": "大阪城 11/16 已见頃，预计 12/2 开始落叶；保留上午公园散步。",
-    "weather": "旅行期逐日预报待发布；若雨量较大，缩短室外散步，转梅田或心斋桥。"
+    "leaf": "大阪城11/20已见頃，预计12/2左右开始落叶。保留上午公园。",
+    "weather": "大阪市16/9°C，降雨20%。上午大阪城公园，白天可脱外层。"
   },
   "11.30": {
-    "leaf": "天授庵已较早见頃，提前到今天13:30；真如堂上午、清水寺夜间末场继续保留，减少祇园逛街。",
-    "weather": "尚无旅行日期的气象厅逐日预报；寺院间可打车，夜枫带保暖中层与防雨外套。若强雨或寄存延误，天授庵改12/2补位。"
+    "leaf": "真如堂11/23官网报见頃，天授庵11/20实拍见頃。保留13:30天授庵和清水寺夜间末场。",
+    "weather": "京都市18/6°C，降雨20%。清水寺夜枫带保暖中层。"
   },
   "12.01": {
-    "leaf": "常寂光寺官网11/18已报见頃、预计本周末盛期，今天09:00优先看；宝筐院11/18约四成变色，10:40随后参拜。",
-    "weather": "旅行期逐日预报待发布；峡谷带防风外套。强风雨先查小火车运行公告，14:00前到龟冈站。"
+    "leaf": "常寂光寺11/22多宝塔周边颜色好，宝筐院11/22见頃，保津峡接近见頃。09:00常寂光寺 → 10:40宝筐院 → 14:30小火车。",
+    "weather": "京都市19/8°C，降雨20%。岚山早出，车上带防风外套。"
   },
   "12.02": {
-    "leaf": "永观堂预计11/24起见頃、12/6起落叶，09:00普通场作为重点；天授庵已移至11/30，今天只作未能成行的补位。",
-    "weather": "旅行期逐日预报待发布；雨天减少水路阁停留，夜枫可删，保留室内休息。"
+    "leaf": "永观堂11/20约五成变色，预计11/24见頃。保留09:00普通场；小火车16:30仅作备选。",
+    "weather": "京都市19/11°C，降雨20%。永观堂上午场，夜间随身加一层。"
   },
   "12.03": {
-    "leaf": "瑠璃光院最新核实实拍仍为11/16初染；圆光寺预测11/20起见頃、12/5起落叶，保持已约时段，月底重点复核。",
-    "weather": "旅行期逐日预报待发布；洛北晨间与书院地板保暖，带厚袜；园路湿滑时缩短室外停留。"
+    "leaf": "瑠璃光院11/19部分见頃，莲华寺和圆光寺已见頃。圆光寺预计12/5起落叶，保留预约时间。",
+    "weather": "京都市15/9°C，降雨20%。洛北早晚偏凉，室内书院备厚袜。"
   },
   "12.04": {
-    "leaf": "东福寺预计11/26起见頃、12/13起落叶，12/4仍在当前预测窗口内。保留08:30普通日间参拜，下午留作补位与返程准备。",
-    "weather": "旅行期逐日预报待发布；早出带保暖外套。雨天优先本坊庭园与京都站室内休息。"
+    "leaf": "东福寺已见頃，落叶预测提前到12/6左右。保留08:30先看通天桥和红叶谷。",
+    "weather": "京都市16/7°C，降雨30%，信赖度D（随预报更新）。东福寺08:30入场，带外套和折伞。"
   },
   "12.05": {
-    "leaf": "返程日不再加赏枫点，保留机场交通余量。",
-    "weather": "旅行期逐日预报待发布；出发前查 HARUKA 与机场运行信息。"
+    "leaf": "退房后前往关西机场。",
+    "weather": "关西机场15/10°C，降雨50%，信赖度E（随预报更新）。返程可能遇雨，临出发复核机场和HARUKA。"
   }
+};
+const TRIP_WEATHER = {
+  "11.28": [
+    "关西机场",
+    19,
+    13,
+    30,
+    "",
+    "20:55抵达。下机防风，机场数值为日最高／最低。"
+  ],
+  "11.29": [
+    "大阪市",
+    16,
+    9,
+    20,
+    "",
+    "上午大阪城公园，白天可脱外层。"
+  ],
+  "11.30": [
+    "京都市",
+    18,
+    6,
+    20,
+    "",
+    "清水寺夜枫带保暖中层。"
+  ],
+  "12.01": [
+    "京都市",
+    19,
+    8,
+    20,
+    "",
+    "岚山早出，车上带防风外套。"
+  ],
+  "12.02": [
+    "京都市",
+    19,
+    11,
+    20,
+    "",
+    "永观堂上午场，夜间随身加一层。"
+  ],
+  "12.03": [
+    "京都市",
+    15,
+    9,
+    20,
+    "",
+    "洛北早晚偏凉，室内书院备厚袜。"
+  ],
+  "12.04": [
+    "京都市",
+    16,
+    7,
+    30,
+    "D",
+    "东福寺08:30入场，带外套和折伞。"
+  ],
+  "12.05": [
+    "关西机场",
+    15,
+    10,
+    50,
+    "E",
+    "返程可能遇雨，临出发复核机场和HARUKA。"
+  ]
 };
 const TEMPLE_NOTICES = [
   {
@@ -359,7 +423,7 @@ function foliageForecast(p) {
 function renderDayConditions(day) {
   const note = DAY_CONDITIONS[day.date];
   if (!note) return '';
-  return `<aside class="day-conditions"><div class="conditions-label"><strong>红叶 · 天气</strong><button data-view="conditions">11/18 更新 ↗</button></div><p><span>红叶</span>${esc(note.leaf)}</p><p><span>天气</span>${esc(note.weather)}</p></aside>`;
+  return `<aside class="day-conditions"><div class="conditions-label"><strong>红叶 · 天气</strong><button data-view="conditions">11/23 更新 ↗</button></div><p><span>红叶</span>${esc(note.leaf)}</p><p><span>天气</span>${esc(note.weather)}</p></aside>`;
 }
 function renderPlaceConditions(id) {
   const p = FOLIAGE.find(x => x.id === (id === 'sagano' ? 'hozukyo' : id));
@@ -367,35 +431,38 @@ function renderPlaceConditions(id) {
   return `<section class="place-conditions tone-${p.tone}"><div class="conditions-label"><strong>红叶近况</strong><span>${esc(p.observed)} 实况</span></div><p><b>${esc(p.status)}</b> · ${esc(foliageForecast(p))}</p><p>${esc(p.advice)}</p><div class="conditions-links">${conditionsSource(p.url, p.provider)}<button data-view="conditions" data-close-place="true">全部近况 ↗</button></div></section>`;
 }
 function renderConditions() {
-  const weatherRows = [['11/19','多云间晴',13,8,10],['11/20','多云间晴',10,2,30],['11/21','多云间晴',10,2,30],['11/22','多云间晴',11,1,30],['11/23','晴间多云',14,0,20],['11/24','多云短时雨',14,6,60],['11/25','多云间晴',15,5,30]];
   $('#content').innerHTML = `
     <section class="conditions-page" aria-labelledby="conditions-title">
-      <div class="section-top"><div><p class="kicker">AUTUMN WATCH / 2026</p><h2 id="conditions-title">红叶与天气</h2></div><time class="snapshot-date" datetime="${CONDITIONS_UPDATED}">11 月 18 日更新</time></div>
-      <p class="conditions-intro">京都 11/30—12/4 · 大阪 11/28—29 · 12/5 返程；11/18复核：天授庵提前11/30，12/1岚山，12/4东福寺</p>
+      <div class="section-top"><div><p class="kicker">AUTUMN WATCH / 2026</p><h2 id="conditions-title">红叶与天气</h2></div><time class="snapshot-date" datetime="${CONDITIONS_UPDATED}">11 月 23 日更新</time></div>
+      <p class="conditions-intro">京都 11/30—12/4 · 大阪 11/28—29 · 12/5 返程 · 11/23核对</p>
       <div class="conditions-highlights">
-        <article class="condition-card tone-watch"><span class="condition-index">01 / 提前</span><h3>天授庵 · 11/30</h3><p>11/16已见頃，提前两天至抵达京都当天下午；减少逛街，保留清水寺夜间末场。</p><button data-goday="2">查看当天 ↗</button></article>
-        <article class="condition-card tone-watch"><span class="condition-index">02 / 庭园优先</span><h3>常寂光寺 · 12/1</h3><p>官网11/18报见頃，预计本周末盛期。09:00先看；本堂书院特开11/30结束，12/1以庭园为主。</p><button data-goday="3">查看当天 ↗</button></article>
-        <article class="condition-card tone-steady"><span class="condition-index">03 / 保留</span><h3>永观堂12/2 · 东福寺12/4</h3><p>均保留普通日间安排；永观堂改09:00早到。洛北12/3已约时段不动，月底再核实叶量。</p><button data-goday="4">永观堂当天 ↗</button></article>
+        <article class="condition-card tone-steady"><h3>11/30 · 洛东与清水寺</h3><p>真如堂、天授庵、清水寺已报见頃。保留日间两寺和清水寺夜间末场。</p><button data-goday="2">查看当天 ↗</button></article>
+        <article class="condition-card tone-steady"><h3>12/1 · 岚山</h3><p>常寂光寺与宝筐院进入见頃，保津峡接近见頃。建议保留14:30小火车。</p><button data-goday="3">查看当天 ↗</button></article>
+        <article class="condition-card tone-watch"><h3>12/4 · 东福寺</h3><p>已到见頃，预计12/6左右开始落叶。08:30先看通天桥。</p><button data-goday="6">查看当天 ↗</button></article>
       </div>
-      ${renderTempleAnnouncements(true)}
+      <details class="conditions-details" open><summary>岚山小火车 · 12/2余票备选</summary>
+        <p>12/2正常运行。11/23官网普通单程票查询，龟冈→嵯峨14:30不可选，16:30→17:04（嵯峨野16号）座位图仅见1个可选座位，在5号开放车厢。嵯峨→龟冈按2位成人查询无可选车次。库存随时变化。</p>
+        <p>京都12/2约16:45日落，推荐12/1 14:30看峡谷。12/2晚班作为一人备选，¥880。</p>
+        <div class="conditions-links">${conditionsSource('https://ars-saganokanko.triplabo.jp/activity/ja/LINKTIVITY-YRBTL','官方普通票')} ${conditionsSource('https://www.sagano-kanko.co.jp/train-info/','运行日历')} ${conditionsSource('https://eco.mtk.nao.ac.jp/koyomi/dni/2026/s2712.html','京都日落')}</div>
+      </details>
       <div class="section-top conditions-section-head"><h3>逐景点近况</h3><span class="subtle">实况日期见各行 · 行程判断为本手册建议</span></div>
-      <div class="foliage-scroll"><table class="foliage-table"><caption class="visually-hidden">景点红叶实况、预测和到访建议</caption><thead><tr><th>景点 / 到访</th><th>最新实况</th><th>日期预测</th><th>行程建议</th></tr></thead><tbody>${FOLIAGE.map(p => `<tr><th scope="row">${PLACES.some(x=>x.id===p.id)?`<button data-place="${p.id}">${esc(p.name)} ↗</button>`:esc(p.name)}<small>${esc(p.visit)} 到访</small></th><td><strong>${esc(p.status)}</strong><small>${esc(p.observed)} · ${conditionsSource(p.url,p.provider)}</small></td><td>${esc(foliageForecast(p))}<small>${p.forecastUrl ? conditionsSource(p.forecastUrl,'Weathernews · 11/18复核') : '以现场照片与官网复核'}</small></td><td><span class="condition-tag tone-${p.tone}">${esc(p.tag)}</span><p>${esc(p.advice)}</p></td></tr>`).join('')}</tbody></table></div>
-      <p class="conditions-footnote">“开始落叶”不等于观赏结束，散红叶也有看点。不同庭园、树种与坡向进度不同；11/18核对，实况仍保留各自的实际观察日期，预测不等于到访当天保证。来源页会继续更新。现有景点配图为往年实拍。</p>
+      <div class="foliage-scroll"><table class="foliage-table"><caption class="visually-hidden">景点红叶实况、预测和到访建议</caption><thead><tr><th>景点 / 到访</th><th>最新实况</th><th>日期预测</th><th>行程建议</th></tr></thead><tbody>${FOLIAGE.map(p => `<tr><th scope="row">${PLACES.some(x=>x.id===p.id)?`<button data-place="${p.id}">${esc(p.name)} ↗</button>`:esc(p.name)}<small>${esc(p.visit)} 到访</small></th><td><strong>${esc(p.status)}</strong><small>${esc(p.observed)} · ${conditionsSource(p.url,p.provider)}</small></td><td>${esc(foliageForecast(p))}<small>${p.forecastUrl ? conditionsSource(p.forecastUrl,'Weathernews · '+p.forecastChecked+'复核') : '以现场照片与官网复核'}</small></td><td><span class="condition-tag tone-${p.tone}">${esc(p.tag)}</span><p>${esc(p.advice)}</p></td></tr>`).join('')}</tbody></table></div>
+      <p class="conditions-footnote">“开始落叶”不等于观赏结束，散红叶也有看点。不同庭园、树种与坡向进度不同；11/23核对。落叶起点为约略预测，实况日期见表。景点配图为往年实拍。</p>
       <div class="conditions-section-head section-top"><h3>天气</h3><span class="subtle">日本当地时间</span></div>
       <div class="weather-grid">
-        <article class="weather-card"><span class="condition-index">旅行期 / 区域趋势</span><h3>气温偏高倾向 · 晴日偏少</h3><p>11/12发布、11/18复核的区域趋势：近畿11/28—12/11平均气温：偏低 10% · 常年 40% · 偏高 50%。近畿太平洋侧 11/14—12/13 晴天预计少于常年，天气每隔数天变化。</p><p class="weather-limit">截至11/18 17:00，已核对的气象厅逐日预报只到11/25，11/28—12/5尚未覆盖。两周气温产品是五日平均，不能写成每天晴雨或降雨概率。</p><small>大阪管区气象台 11/12 14:30 发布；11/19预计发布下一期。${conditionsSource(FOLIAGE_SOURCES.outlook,'气象厅')} · ${conditionsSource(FOLIAGE_SOURCES.bulletin,'公告转载')}</small></article>
-        <article class="weather-card"><span class="condition-index">当前一周 / 京都市</span><h3>11/20—23 冷 · 11/24 有雨信号</h3><p>京都11/20—23最高10—14°C、最低0—2°C；11/24短时雨概率由旧版50%调到60%，预计14/6°C。降温可能推动变色，雨后叶量需重新看，不能据此断定旅行时下雨。</p><p>本段用于观察出发前的变化；旅行日期的逐日预报待后续发布。</p><small>气象厅11/18 17:00发布。${conditionsSource(FOLIAGE_SOURCES.jma,'京都最新预报')}</small></article>
+        <article class="weather-card"><h3>11/24 · 京都降雨</h3><p>日本气象厅11/23 05:00发布的京都预报显示，11/24上午降雨概率90%，下午60%。雨后可看常寂光寺、天授庵的叶量。</p><small>${conditionsSource(FOLIAGE_SOURCES.jma,'气象厅 · 京都')}</small></article>
+        <article class="weather-card"><h3>旅行期 · 11/23预报</h3><p>11/30–12/3京都预报降雨概率均20%。12/4京都30%（D），12/5关西机场50%（E）。D、E的降雨预报容易变化。</p><small>${conditionsSource('https://weathernews.jp/onebox/tenki/kyoto/26100/week.html','京都')} · ${conditionsSource('https://weathernews.jp/s/forecast/detail.fcgi?area=Osaka','大阪')} · ${conditionsSource('https://weathernews.jp/onebox/tenki/spot/41000214/week.html','关西机场')}</small></article>
       </div>
-      <details class="conditions-details"><summary>查看当前一周逐日预报 · 11/19—25</summary><div class="foliage-scroll"><table class="weather-table"><thead><tr><th>日期</th><th>天气</th><th>最高 / 最低</th><th>降雨概率</th></tr></thead><tbody>${weatherRows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} / ${r[3]}°C</td><td>${r[4]}%</td></tr>`).join('')}</tbody></table></div></details>
-      <details class="conditions-details" open><summary>旅行日期 · 当前能确认的范围</summary><div class="foliage-scroll"><table class="weather-table"><thead><tr><th>日期</th><th>地区 / 行程</th><th>逐日天气</th><th>出行准备</th></tr></thead><tbody>${DAYS.map(d=>`<tr><td>${esc(d.date)}</td><td>${esc(d.area)}</td><td>尚未进入本次气象厅一周预报</td><td>${esc(DAY_CONDITIONS[d.date].weather)}</td></tr>`).join('')}</tbody></table></div><p class="conditions-footnote">区域趋势、常年值、旅行日期的逐日预报分开呈现；不将出发前一周的降雨概率填到行程日期。${conditionsSource('https://www.data.jma.go.jp/cpd/twoweek/','气象厅两周气温（五日平均）')} · ${conditionsSource('https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=270000','大阪官方预报')}</p></details>
+      <details class="conditions-details" open><summary>逐日天气 · 11/28—12/5</summary>
+      <div class="foliage-scroll"><table class="weather-table"><thead><tr><th>日期</th><th>地区</th><th>最高 / 最低</th><th>降雨概率</th><th>准备</th></tr></thead><tbody>
+      ${Object.entries(TRIP_WEATHER).map(([date,[region,hi,lo,rain,confidence,action]]) => `<tr><td>${esc(date)}</td><td>${esc(region)}</td><td>${hi} / ${lo}°C</td><td>${rain}%${confidence ? ' · '+confidence : ''}</td><td>${esc(action)}</td></tr>`).join('')}
+      </tbody></table></div><p class="conditions-footnote">Weathernews 11/23查询。时间为日本当地时间，温度和降雨概率为地区预报。出发前再查小时预报。</p></details>
       <details class="conditions-details"><summary>旅行期常年气温 · 打包参考</summary><div class="foliage-scroll"><table class="weather-table"><thead><tr><th>地区</th><th>时段</th><th>平均日最高</th><th>平均日最低</th></tr></thead><tbody><tr><td>京都</td><td>11 月下旬</td><td>15.3°C</td><td>6.5°C</td></tr><tr><td>京都</td><td>12 月上旬</td><td>13.3°C</td><td>4.7°C</td></tr><tr><td>大阪</td><td>11 月下旬</td><td>15.9°C</td><td>8.4°C</td></tr><tr><td>大阪</td><td>12 月上旬</td><td>13.9°C</td><td>6.7°C</td></tr></tbody></table></div><p class="conditions-footnote">1991—2020 常年值，非本次旅行逐日预报。${conditionsSource(FOLIAGE_SOURCES.kyoto,'京都')} · ${conditionsSource(FOLIAGE_SOURCES.osaka,'大阪')}</p></details>
-      <div class="utility-grid conditions-utilities"><div class="utility"><div class="label">随身</div><p>保暖中层＋防风外套；夜枫、峡谷加围巾，书院带厚袜。小伞与防滑步行鞋。</p></div><div class="utility"><div class="label">风雨 / 叶量不足</div><p>强风雨前优先看树上红叶；雨后看落叶与池景。晚红叶备选：下鸭神社糺之森、建仁寺潮音庭；先看当期照片再决定。</p></div><div class="utility"><div class="label">复核时间</div><p>11/19看新区域趋势；11/24雨后再查常寂光寺、天授庵与圆光寺新照；11/25—26检查覆盖到的旅行日期预报，出发前48小时复核运行。</p></div></div>
+      <div class="utility-grid conditions-utilities"><div class="utility"><div class="label">随身</div><p>保暖中层＋防风外套；夜枫、峡谷加围巾，书院带厚袜。小伞与防滑步行鞋。</p></div><div class="utility"><div class="label">风雨 / 叶量不足</div><p>强风雨前优先看树上红叶；雨后看落叶与池景。晚红叶备选：下鸭神社糺之森、建仁寺潮音庭；先看当期照片再决定。</p></div><div class="utility"><div class="label">复核时间</div><p>11/24雨后查各寺新照，11/26复核12/3洛北与12/4东福寺叶况。临出发看逐小时降雨和运行公告。</p></div></div>
+      ${renderTempleAnnouncements()}
       <div class="conditions-links conditions-bottom-links">${conditionsSource(FOLIAGE_SOURCES.jr,'JR 东海·现场照片与晚红叶参考')}${conditionsSource(FOLIAGE_SOURCES.west,'JR 西日本·保津峡')}${conditionsSource('https://www.sagano-kanko.co.jp/','小火车运行公告')}</div>
     </section>`;
 }
-
-
-
 
 function renderPlaceAnnouncements(id) {
  const n=TEMPLE_NOTICES.find(x=>x.id===id);if(!n)return '';
