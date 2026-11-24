@@ -2,6 +2,15 @@ const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']
 let view='itinerary',dayIndex=2,area='全部',transport='base',zoom=1;let checked={};try{checked=JSON.parse(localStorage.getItem('kyoto-trip-checks')||'{}')}catch{}
 try{if(localStorage.getItem('kyoto-route-revision')!=='20261118'){const moved={};Object.entries(checked).forEach(([k,v])=>{const m=k.match(/^(3|6)-(.*)$/);if(!m||m[1]==='3')moved[m?'6-'+m[2]:k]=v});checked=moved;localStorage.setItem('kyoto-trip-checks',JSON.stringify(checked));localStorage.setItem('kyoto-route-revision','20261118')}}catch{}
 try{if(localStorage.getItem('kyoto-foliage-revision')!=='20261118-evening'){for(const k of Object.keys(checked))if(/^[234]-/.test(k))delete checked[k];localStorage.setItem('kyoto-trip-checks',JSON.stringify(checked));localStorage.setItem('kyoto-foliage-revision','20261118-evening')}}catch{}
+try {
+ if (localStorage.getItem('kyoto-rail-revision') !== '20261124') {
+  for (const key of Object.keys(checked)) {
+   if (/^[34]-/.test(key)) delete checked[key];
+  }
+  localStorage.setItem('kyoto-trip-checks', JSON.stringify(checked));
+  localStorage.setItem('kyoto-rail-revision', '20261124');
+ }
+} catch {}
 const areas=['全部','洛东','东山','岚山','洛北','京都南部'];const site=id=>PLACES.find(p=>p.id===id);const sourceLink=(p,label='官网')=>`<a class="btn" href="${p.url}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`;
 const mapButton=(key,title)=>mapMarkup(key,title);
 const pill=(text)=>`<span class="pill ${text.includes('已预约')?'booked':text.includes('待出票')?'pending':''}">${esc(text)}</span>`;
