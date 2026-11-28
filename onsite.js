@@ -530,8 +530,8 @@ const ONSITE_GUIDES = {
   },
   "tofukuji": {
     "name": "东福寺",
-    "date": "12/4",
-    "duration": "通天桥区90分钟；方丈另加45–60分钟",
+    "date": "11/29 · 午后",
+    "duration": "两区约150–165分钟（含排队余量）",
     "entry": "普通日间通天桥拝观受付",
     "exit": "依秋季单向出口；方丈须另到其受付",
     "steps": [
@@ -572,7 +572,7 @@ const ONSITE_GUIDES = {
       }
     ],
     "short": "约75–90分钟：只走通天桥、开山堂及当日开放顺路，省略另收费的方丈。",
-    "note": "通天桥、方丈是两个受付区域；秋季出入口及桥面摄影限制会调整。现场导流优先，地图上的连线不代表能逆行或重复进出。",
+    "note": "11/29周日目标13:30到受付，先通天桥、再方丈；16:00停止受付、16:30闭门。若14:00后才到，优先通天桥；方丈按剩余时间决定。秋季导流、摄影限制及具体开放范围以现场为准。12/4只作未完成时的备用日。",
     "sources": [
       {
         "label": "东福寺官方境内图",
@@ -639,7 +639,7 @@ const ONSITE_GUIDES = {
   }
 };
 
-const ONSITE_DAYS={2:['shinnyodo','tenjuan','kiyomizu'],3:['eikando','philosopher'],4:['jojakkoji','houkyoin'],5:['rurikoin','rengeji','enkoji'],6:['tofukuji']};
+const ONSITE_DAYS={1:['tofukuji'],2:['shinnyodo','tenjuan','kiyomizu'],3:['eikando','philosopher'],4:['jojakkoji','houkyoin'],5:['rurikoin','rengeji','enkoji']};
 let onsiteSelected='shinnyodo';
 function onsiteSequence(g){return `<div class="onsite-sequence" aria-label="建议游览顺序">${g.steps.map((s,i)=>`<span><b>${i+1}</b>${esc(s.name)}</span>`).join('')}</div><p class="onsite-caption">编号是本页建议顺序；境内图用于对照地标。无底图时仅示意先后，不代表比例或方位。</p>`}
 function renderOnsiteGuide(id,expanded=true){const g=ONSITE_GUIDES[id];if(!g)return '';return `<details class="onsite-guide" ${expanded?'open':''}><summary><span><small>${esc(g.date)}</small><strong>${esc(g.name)} · 景内怎么走</strong></span><span class="onsite-duration">${esc(g.duration)}<i>展开 / 收起</i></span></summary><div class="onsite-body"><div class="onsite-entry"><p><b>进入</b>${esc(g.entry)}</p><p><b>离开</b>${esc(g.exit)}</p></div><div class="onsite-layout"><div class="onsite-map-col">${g.map?`<button class="onsite-map-preview" data-onsitemap="${id}" aria-label="放大${esc(g.name)}官方境内图"><img src="assets/onsite/${g.map}.webp" alt="${esc(g.name)}境内图（官方来源，真如堂附中文标注），可放大；与下方步骤对照" loading="lazy"><span>境内图 · 点击放大 ⤢</span></button><p class="onsite-caption">${id==='philosopher'?'保胜会全段案内图；本次只走南端。':'境内图用于认地标；真如堂为官方底图加中文标注。图中地标号与下方步骤号不同。'}</p>`:`<div class="onsite-schematic"><small>游览顺序示意 · 非方位地图</small>${g.steps.map((s,i)=>`<div><b>${i+1}</b><span>${esc(s.name)}</span></div>`).join('')}</div>`}${g.map?onsiteSequence(g):''}<div class="onsite-short"><b>想轻松一点</b><p>${esc(g.short)}</p></div></div><ol class="onsite-steps">${g.steps.map((s,i)=>`<li><div class="onsite-step-head"><b>${i+1}</b><h4>${esc(s.name)}</h4><span>${esc(s.time)}</span></div><p><strong>怎么走</strong>${esc(s.walk)}</p><p><strong>看什么</strong>${esc(s.look)}</p><p class="onsite-photo"><strong>停留 / 拍摄</strong>${esc(s.photo)}</p></li>`).join('')}</ol></div><div class="onsite-note">${esc(g.note)}</div><div class="onsite-sources"><span>依据 · 11/27核对</span>${g.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)} ↗</a>`).join('')}</div></div></details>`}
@@ -647,3 +647,4 @@ function renderOnsiteDay(day){const ids=ONSITE_DAYS[day];if(!ids)return '';retur
 function renderOnsite(){const g=ONSITE_GUIDES[onsiteSelected];$('#content').innerHTML=`<section class="onsite-hub"><div class="section-top"><div><p class="kicker">POCKET WALKING GUIDE</p><h2>景内导览</h2><p class="onsite-intro">进门之后怎么逛：对照地标，逐站看庭园、红叶与建筑。</p></div></div><div class="onsite-picker" role="group" aria-label="选择景内导览">${Object.entries(ONSITE_GUIDES).map(([id,g])=>`<button class="filter ${id===onsiteSelected?'active':''}" data-onsite="${id}" aria-pressed="${id===onsiteSelected}">${esc(g.name)}</button>`).join('')}</div>${renderOnsiteGuide(onsiteSelected)}<p class="onsite-footer-note">停留时间含一般步行，排队与人流会增加用时。官方底图用于认地标，按现场箭头和开放范围通行。</p></section>`}
 function showOnsiteMap(id){const g=ONSITE_GUIDES[id];if(!g?.map)return;let d=document.querySelector('#onsite-map-dialog');if(!d){d=document.createElement('dialog');d.id='onsite-map-dialog';d.innerHTML='<div class="onsite-viewer-bar"><h2></h2><button class="btn" data-onsitezoom="out" aria-label="缩小境内图">−</button><button class="btn" data-onsitezoom="fit">适应</button><button class="btn" data-onsitezoom="in" aria-label="放大境内图">＋</button><button class="btn" data-onsiteclose="true" aria-label="关闭境内图">关闭 ×</button></div><p class="onsite-viewer-help">放大后可向四周滑动查看；也可用浏览器双指缩放。原图建筑编号与本页步骤号不同。</p><div class="onsite-map-scroll" tabindex="0" aria-label="可滑动的官方境内图"><img alt=""></div><a class="onsite-original" target="_blank" rel="noopener noreferrer">查看官方来源 ↗</a>';document.body.append(d);d.addEventListener('click',e=>{if(e.target===d)d.close()})}d.querySelector('h2').textContent=g.name+' · 境内图';const img=d.querySelector('img');img.src='assets/onsite/'+g.map+'.webp';img.alt=g.name+'境内图（官方来源，真如堂附中文标注）';img.style.width='100%';d.dataset.scale='1';d.querySelector('a').href=g.sources[0].url;d.showModal();d.querySelector('.onsite-map-scroll').scrollTo(0,0)}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.onsite){onsiteSelected=b.dataset.onsite;renderOnsite();return}if(b.dataset.onsitemap){showOnsiteMap(b.dataset.onsitemap);return}if(b.dataset.onsiteclose){b.closest('dialog').close();return}if(b.dataset.onsitezoom){const d=b.closest('dialog'),a=b.dataset.onsitezoom;let n=Number(d.dataset.scale)||1;n=a==='fit'?1:Math.max(1,Math.min(4,n+(a==='in'?.5:-.5)));d.dataset.scale=String(n);d.querySelector('img').style.width=(n*100)+'%'}});
+
